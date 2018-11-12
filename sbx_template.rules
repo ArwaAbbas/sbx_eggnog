@@ -1,0 +1,8 @@
+rule example_rule:
+	input:
+		#files required for input	
+	output:
+		#files created after successful rule completion
+	shell:
+		#commands run during rule
+
