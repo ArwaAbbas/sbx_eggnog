@@ -1,2 +1,2 @@
-sbx_template:
-  threads: 4
+sbx_eggnog:
+  threads: 8

@@ -1,8 +1,35 @@
-#rule example_rule:
-#	input:
-		#files required for input	
-#	output:
-		#files created after successful rule completion
-#	shell:
-		#commands run during rule
+# -*- mode: Snakemake -*-
+
+rule run_eggnog_bac:
+	input: 
+		faa = str(ANNOTATION_FP/'genes'/'prodigal'/'{sample}_genes_prot.fa'),
+	output:
+		hmm_hits = str(ANNOTATION_FP/'eggnog'/'results'/'bac'/'{sample}_bac.emapper.hmm_hits_rgi'),
+		seed = str(ANNOTATION_FP/'eggnog'/'results'/'bac'/'{sample}_bac.emapper.seed_orthologs'),
+		ann = str(ANNOTATION_FP/'eggnog'/'results'/'bac'/'{sample}_bac.emapper.annotations')
+	params:
+		db_path = str(ANNOTATION_FP/'eggnog'/'data'),
+		out_dir = str(ANNOTATION_FP/'eggnog'/'results:wq'/'bac'),
+		out_file = str('{sample}_bac')
+	
+	threads: 
+		Cfg['sbx_eggnog']['threads']
+	shell:
+		"""
+		emapper.py -i {input.faa} --output {params.out_file} -d bact --data_dir {params.db_path} --output_dir {params.out_dir} --cpu {threads}
+		"""
+
+rule download_eggnog_db:
+	output:
+		str(ANNOTATION_FP/'eggnog'/'data'/'eggnog.db')
+	params:
+		db_path = str(ANNOTATION_FP/'eggnog'/'data')
+	shell:
+		"""
+		download_eggnog_data.py bact arch viruses --data_dir {params.db_path} 
+		"""
+rule all_eggnog_bac:
+	input:
+		expand(str(ANNOTATION_FP/'eggnog'/'results'/'bac'/'{sample}_bac.emapper.annotations'),sample=Samples.keys())
+		#rules.run_rgi.output
 
