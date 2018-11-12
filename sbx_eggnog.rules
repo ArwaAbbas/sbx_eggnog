@@ -1,8 +1,8 @@
-rule example_rule:
-	input:
+#rule example_rule:
+#	input:
 		#files required for input	
-	output:
+#	output:
 		#files created after successful rule completion
-	shell:
+#	shell:
 		#commands run during rule
 
