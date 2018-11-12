@@ -6,30 +6,33 @@ This is a template to use to extend the [Sunbeam pipeline](https://github.com/su
  - `config.yml` contains configuration options that can be specified by the user when running an extension
  - `sbx_template.rules` contains the rules (logic/commands run) of the extension
  
-## Creating an extension
+## Anatomy of the extension
 
 The dependencies required for this extension are listed in the `requirements.txt` file in the [standard requirement format](https://pip.readthedocs.io/en/1.1/requirements.html). 
 
-The `config.yml` contains parameters that the user might need to modify when running an extension. Default values should be specified for each bottom-level key.
+The `config.yml` contains parameters that the user can modify when running an extension. Default values should be specified for each bottom-level key.
 
-Finally, `sbx_template.rules` contains the actual logic for the extension, including required input and output files. A detailed discussion of Snakemake rule creation is beyond the scope of this tutorial, but definitely check out [the Snakemake tutorial](http://snakemake.readthedocs.io/en/stable/tutorial/basics.html) and any of the [extensions by sunbeam-labs](https://github.com/sunbeam-labs) for inspiration.
+Finally, `sbx_eggnog.rules` contains the actual logic for the extension, including required input and output files. A detailed discussion of Snakemake rule creation is beyond the scope of this tutorial, but definitely check out [the Snakemake tutorial](http://snakemake.readthedocs.io/en/stable/tutorial/basics.html) and any of the [extensions by sunbeam-labs](https://github.com/sunbeam-labs) for inspiration.
 
-## Installing an extension
+## Installing the extension
 
 Installing an extension is as simple as cloning (or moving) your extension directory into the sunbeam/extensions/ folder, installing requirements through Conda, and adding the new options to your existing configuration file: 
-This extension has dependencies that conflict with those of  [sbx_rgi](https://github.com/louiejtaylor/sbx_rgi) so may need to create a separate conda environment (within the sunbeam environment) to run it.
 
-    source activate sunbeam
-    conda create -n eggnog
-    source activate eggnog
+This extension has dependencies that conflict with those of [sbx_rgi](https://github.com/louiejtaylor/sbx_rgi) so may need to create a separate conda environment (within the sunbeam environment) to run it.
+
+    source activate sunbeam 
+    conda create -n eggnog #Optional
+    source activate eggnog #Optional
     git clone https://github.com/ArwaAbbas/sbx_eggnog/ sunbeam/extensions/sbx_eggnog
     conda install --file requirements.txt -c bioconda
     cat sunbeam/extensions/sbx_eggnog/config.yml >> sunbeam_config.yml
 
-## Running an extension
+## Running sbx_eggnog
+Currently only disk based searches on the optimized bacterial database is supported. However, the optimized bacterial, archael and viral databases are all downloaded as part of the extension.
 
-To run an extension, simply run Sunbeam as usual with your extension's target rule specified:
+Detailed information on eggnog [here](https://github.com/jhcepas/eggnog-mapper/wiki).
 
-    sunbeam run --configfile=sunbeam_config.yml example_rule
+To run, simply run Sunbeam as usual with the target rule specified:
+
+    sunbeam run --configfile sunbeam_config.yml all_eggnog_bac
     
-# sbx_eggnog 
