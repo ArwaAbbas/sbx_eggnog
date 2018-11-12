@@ -3,13 +3,14 @@
 rule run_eggnog_bac:
 	input: 
 		faa = str(ANNOTATION_FP/'genes'/'prodigal'/'{sample}_genes_prot.fa'),
+		db = str(ANNOTATION_FP/'eggnog'/'data'/'eggnog.db')
 	output:
 		hmm_hits = str(ANNOTATION_FP/'eggnog'/'results'/'bac'/'{sample}_bac.emapper.hmm_hits_rgi'),
 		seed = str(ANNOTATION_FP/'eggnog'/'results'/'bac'/'{sample}_bac.emapper.seed_orthologs'),
 		ann = str(ANNOTATION_FP/'eggnog'/'results'/'bac'/'{sample}_bac.emapper.annotations')
 	params:
 		db_path = str(ANNOTATION_FP/'eggnog'/'data'),
-		out_dir = str(ANNOTATION_FP/'eggnog'/'results:wq'/'bac'),
+		out_dir = str(ANNOTATION_FP/'eggnog'/'results'/'bac'),
 		out_file = str('{sample}_bac')
 	
 	threads: 
