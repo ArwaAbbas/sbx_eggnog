@@ -4,7 +4,7 @@ This is a template to use to extend the [Sunbeam pipeline](https://github.com/su
 
  - `requirements.txt` specifies the extension's dependencies
  - `config.yml` contains configuration options that can be specified by the user when running an extension
- - `sbx_template.rules` contains the rules (logic/commands run) of the extension
+ - `sbx_eggnog.rules` contains the rules (logic/commands run) of the extension
  
 ## Anatomy of the extension
 
@@ -12,7 +12,7 @@ The dependencies required for this extension are listed in the `requirements.txt
 
 The `config.yml` contains parameters that the user can modify when running an extension. Default values should be specified for each bottom-level key.
 
-Finally, `sbx_eggnog.rules` contains the actual logic for the extension, including required input and output files. A detailed discussion of Snakemake rule creation is beyond the scope of this tutorial, but definitely check out [the Snakemake tutorial](http://snakemake.readthedocs.io/en/stable/tutorial/basics.html) and any of the [extensions by sunbeam-labs](https://github.com/sunbeam-labs) for inspiration.
+Finally, `sbx_eggnog.rules` contains the actual logic for the extension, including required input and output files. Check out [the Snakemake tutorial](http://snakemake.readthedocs.io/en/stable/tutorial/basics.html) and any of the [extensions by sunbeam-labs](https://github.com/sunbeam-labs) for information on how to modify the rules.
 
 ## Installing the extension
 
@@ -28,7 +28,7 @@ This extension has dependencies that conflict with those of [sbx_rgi](https://gi
     cat sunbeam/extensions/sbx_eggnog/config.yml >> sunbeam_config.yml
 
 ## Running sbx_eggnog
-Currently only disk based searches on the optimized bacterial database is supported. However, the optimized bacterial, archael and viral databases are all downloaded as part of the extension.
+Currently only disk based searches on the optimized bacterial database is supported. However, the optimized bacterial, archaeal and viral databases are all downloaded as part of the extension.
 
 Detailed information on eggnog [here](https://github.com/jhcepas/eggnog-mapper/wiki).
 
