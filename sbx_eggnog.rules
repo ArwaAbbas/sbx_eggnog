@@ -25,6 +25,7 @@ rule download_eggnog_db:
 		str(ANNOTATION_FP/'eggnog'/'data'/'eggnog.db')
 	params:
 		db_path = str(ANNOTATION_FP/'eggnog'/'data')
+	threads: 1
 	shell:
 		"""
 		download_eggnog_data.py bact arch viruses --data_dir {params.db_path} -y 
