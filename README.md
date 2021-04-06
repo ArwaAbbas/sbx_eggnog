@@ -5,7 +5,19 @@ This is a template to use to extend the [Sunbeam pipeline](https://github.com/su
  - `requirements.txt` specifies the extension's dependencies
  - `config.yml` contains configuration options that can be specified by the user when running an extension
  - `sbx_eggnog.rules` contains the rules (logic/commands run) of the extension
+
+## Installation and configuration
  
+To install:
+
+    sunbeam extend https://github.com/ArwaAbbas/sbx_eggnog
+
+Paramaters for `sbx_eggnog` are automatically added to your config file on `sunbeam init`. If you're installing an extension in a project where you already have a config file, run the following to add the options for your newly added extension to your config (the `-i` flag means in-place config file modification; remove the `-i` flag to direct the updated config to stdout):
+
+    sunbeam config update -i sunbeam_config.yml
+
+See legacy instructions for older Sunbeam versions below.
+
 ## Anatomy of the extension
 
 The dependencies required for this extension are listed in the `requirements.txt` file in the [standard requirement format](https://pip.readthedocs.io/en/1.1/requirements.html). 
@@ -14,7 +26,17 @@ The `config.yml` contains parameters that the user can modify when running an ex
 
 Finally, `sbx_eggnog.rules` contains the actual logic for the extension, including required input and output files. Check out [the Snakemake tutorial](http://snakemake.readthedocs.io/en/stable/tutorial/basics.html) and any of the [extensions by sunbeam-labs](https://github.com/sunbeam-labs) for information on how to modify the rules.
 
-## Installing the extension
+## Running sbx_eggnog
+Currently only disk based searches on the optimized bacterial database is supported. However, the optimized bacterial, archaeal and viral databases are all downloaded as part of the extension.
+
+Detailed information on eggnog [here](https://github.com/jhcepas/eggnog-mapper/wiki).
+
+To run, simply run Sunbeam as usual with the target rule specified:
+
+    sunbeam run --configfile sunbeam_config.yml all_eggnog_bac
+    
+
+## Legacy installation instructions (Sunbeam <3.0)
 
 Installing an extension is as simple as cloning (or moving) your extension directory into the sunbeam/extensions/ folder, installing requirements through Conda, and adding the new options to your existing configuration file: 
 
@@ -27,12 +49,3 @@ This extension has dependencies that conflict with those of [sbx_rgi](https://gi
     conda install --file requirements.txt -c bioconda
     cat sunbeam/extensions/sbx_eggnog/config.yml >> sunbeam_config.yml
 
-## Running sbx_eggnog
-Currently only disk based searches on the optimized bacterial database is supported. However, the optimized bacterial, archaeal and viral databases are all downloaded as part of the extension.
-
-Detailed information on eggnog [here](https://github.com/jhcepas/eggnog-mapper/wiki).
-
-To run, simply run Sunbeam as usual with the target rule specified:
-
-    sunbeam run --configfile sunbeam_config.yml all_eggnog_bac
-    
