@@ -33,7 +33,7 @@ Detailed information on eggnog [here](https://github.com/jhcepas/eggnog-mapper/w
 
 To run, simply run Sunbeam as usual with the target rule specified:
 
-    sunbeam run --configfile sunbeam_config.yml all_eggnog_bac
+    sunbeam run --configfile sunbeam_config.yml --use-conda all_eggnog_bac
     
 
 ## Legacy installation instructions (Sunbeam <3.0)
